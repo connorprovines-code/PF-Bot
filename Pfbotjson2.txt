@@ -1,0 +1,32 @@
+Hooks.on("chatMessage", (html, content, msg) => {
+  if (content.startsWith("!bot ")) {
+    const message = content.substring(5);
+    
+    fetch("https://connorprovines.app.n8n.cloud/webhook/PF-Bot", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        message: message,
+        user: game.user.name
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      ChatMessage.create({
+        content: data.reply || data.message || "Bot response received",
+        speaker: { alias: "🤖 Bot" }
+      });
+    })
+    .catch(error => {
+      console.error("Bot error:", error);
+      ChatMessage.create({
+        content: "Bot failed to respond",
+        speaker: { alias: "🤖 Bot" }
+      });
+    });
+    
+    return false; // Prevents the !bot command from showing in chat
+  }
+});

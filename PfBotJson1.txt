@@ -1,0 +1,12 @@
+{
+  "id": "n8n-bot",
+  "title": "n8n Bot",
+  "version": "1.0.0",
+  "compatibility": {
+    "minimum": "10",
+    "verified": "11"
+  },
+  "scripts": ["bot.js"],
+  "manifest": "https://raw.githubusercontent.com/connorprovines-code/PF-Bot/main/module.json",
+  "download": "https://github.com/connorprovines-code/PF-Bot/archive/refs/heads/main.zip"
+}
